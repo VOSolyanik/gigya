@@ -1,0 +1,122 @@
+<div [formGroup]="form" *ngIf="isDataLoaded" class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div *ngIf="errorCode && errorCode !== 0" class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+    <div *ngIf="errorCode === 0" class="alert alert-success" role="alert">
+      Data saved successfuly
+    </div>
+  </div>
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="verifyEmail"
+            formControlName="verifyEmail">
+          <label class="form-check-label" for="verifyEmail">
+            Verify Email
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="verifyProviderEmail"
+            formControlName="verifyProviderEmail">
+          <label class="form-check-label" for="verifyProviderEmail">
+            Verify Provider Email
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="allowUnverifiedLogin"
+            formControlName="allowUnverifiedLogin">
+          <label class="form-check-label" for="allowUnverifiedLogin">
+            Allow Unverified Login
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="preventLoginIDHarvesting"
+            formControlName="preventLoginIDHarvesting">
+          <label class="form-check-label" for="preventLoginIDHarvesting">
+            Prevent Login ID Harvesting
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="sendWelcomeEmail"
+            formControlName="sendWelcomeEmail">
+          <label class="form-check-label" for="sendWelcomeEmail">
+            Send Welcome Email
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <div class="form-check">
+          <input class="form-check-input"
+            type="checkbox"
+            id="sendAccountDeletedEmail"
+            formControlName="sendAccountDeletedEmail">
+          <label class="form-check-label" for="sendAccountDeletedEmail">
+            Send Account Deleted Email
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="defaultLanguage" class="col-sm-3 col-form-label">Default Language</label>
+      <div class="col-sm-9">
+        <input type="text"
+          class="form-control"
+          id="defaultLanguage"
+          formControlName="defaultLanguage">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="loginIdentifierConflict" class="col-sm-3 col-form-label">Login Identifiers</label>
+      <div class="col-sm-9">
+        <select class="form-control"
+          id="loginIdentifierConflict"
+          formControlName="loginIdentifierConflict">
+          <option *ngFor="let opt of loginIdentifierConflictOptions" [value]="opt">{{opt}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="loginIdentifiers" class="col-sm-3 col-form-label">Login Identifiers</label>
+      <div class="col-sm-9">
+        <input type="text"
+          class="form-control"
+          id="loginIdentifiers"
+          formControlName="loginIdentifiers">
+        <div *ngIf="form.get('loginIdentifiers').dirty && form.get('loginIdentifiers').errors && form.get('loginIdentifiers').errors['pattern']" class="alert alert-danger" role="alert">
+          Field value should be comma separate strings
+        </div>
+      </div>
+    </div>
+    <button (click)="onSave()" [disabled]="form.invalid || isDisabled" class="btn btn-primary">Submit</button>
+  </div>
+</div>
